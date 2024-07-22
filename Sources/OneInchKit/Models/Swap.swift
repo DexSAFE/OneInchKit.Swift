@@ -1,5 +1,5 @@
-import BigInt
 import Foundation
+import BigInt
 
 public struct Swap {
     public let fromToken: Token
@@ -15,16 +15,21 @@ public struct Swap {
         self.route = route
         self.transaction = transaction
     }
+
 }
 
 extension Swap: CustomStringConvertible {
+
     public var description: String {
         "[Swap {\nfromToken:\(fromToken.name) - \ntoToken:\(toToken.name); \ntoAmount: \(toTokenAmount.description) \ntx: \(transaction.description)]"
     }
+
 }
 
-public extension Swap {
-    var amountOut: Decimal? {
+extension Swap {
+
+    public var amountOut: Decimal? {
         toTokenAmount.toDecimal(decimals: toToken.decimals)
     }
+
 }

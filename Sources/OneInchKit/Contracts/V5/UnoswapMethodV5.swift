@@ -1,6 +1,6 @@
+import Foundation
 import BigInt
 import EvmKit
-import Foundation
 
 // This method assumes that recipient is always the initiator of the transaction
 
@@ -26,4 +26,5 @@ class UnoswapMethodV5: ContractMethod {
     override var arguments: [Any] {
         [srcToken, amount, minReturn, params]
     }
+
 }

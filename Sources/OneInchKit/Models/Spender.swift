@@ -6,4 +6,5 @@ struct Spender {
     init(address: Address) {
         self.address = address
     }
+
 }

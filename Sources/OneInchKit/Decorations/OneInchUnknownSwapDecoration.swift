@@ -12,7 +12,7 @@ public class OneInchUnknownSwapDecoration: OneInchDecoration {
         super.init(contractAddress: contractAddress)
     }
 
-    override public func tags() -> [TransactionTag] {
+    public override func tags() -> [TransactionTag] {
         var tags = [TransactionTag]()
 
         if let tokenIn = tokenAmountIn?.token {
@@ -27,11 +27,14 @@ public class OneInchUnknownSwapDecoration: OneInchDecoration {
 
         return tags
     }
+
 }
 
-public extension OneInchUnknownSwapDecoration {
-    struct TokenAmount {
+extension OneInchUnknownSwapDecoration {
+
+    public struct TokenAmount {
         public let token: Token
         public let value: BigUInt
     }
+
 }

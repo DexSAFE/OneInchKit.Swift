@@ -1,6 +1,6 @@
 import BigInt
-import Eip20Kit
 import EvmKit
+import Eip20Kit
 
 open class OneInchDecoration: TransactionDecoration {
     public let contractAddress: Address
@@ -9,29 +9,32 @@ open class OneInchDecoration: TransactionDecoration {
         self.contractAddress = contractAddress
     }
 
-    func tag(token: Token, type: TransactionTag.TagType, addresses: [String] = []) -> TransactionTag {
+    func tag(token: Token, type: TransactionTag.TagType) -> TransactionTag {
         switch token {
-        case .evmCoin: return TransactionTag(type: type, protocol: .native, addresses: addresses)
-        case let .eip20Coin(tokenAddress, _): return TransactionTag(type: type, protocol: .eip20, contractAddress: tokenAddress, addresses: addresses)
+        case .evmCoin: return TransactionTag(type: type, protocol: .native)
+        case .eip20Coin(let tokenAddress, _): return TransactionTag(type: type, protocol: .eip20, contractAddress: tokenAddress)
         }
     }
+
 }
 
-public extension OneInchDecoration {
-    enum Amount {
+extension OneInchDecoration {
+
+    public enum Amount {
         case exact(value: BigUInt)
         case extremum(value: BigUInt)
     }
 
-    enum Token {
+    public enum Token {
         case evmCoin
         case eip20Coin(address: Address, tokenInfo: TokenInfo?)
 
         public var tokenInfo: TokenInfo? {
             switch self {
-            case let .eip20Coin(_, tokenInfo): return tokenInfo
+            case .eip20Coin(_, let tokenInfo): return tokenInfo
             default: return nil
             }
         }
     }
+
 }
